@@ -1,0 +1,26 @@
+version: "3"
+services:
+  spider:
+    image: osnsyc/grocycompanioncn:latest
+    restart: always
+    ports:
+      - "9288:9288"
+    volumes:
+      - ./config.ini:/usr/src/app/config.ini
+      # - ./u2net.onnx:/root/.u2net/u2net.onnx
+    depends_on:
+      - chrome
+    networks:
+      - grocy_cn_campanion
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    restart: always
+    ports:
+      - "4444:4444"
+    shm_size: 1g
+    networks:
+      - grocy_cn_campanion
+
+networks:
+  grocy_cn_campanion:
