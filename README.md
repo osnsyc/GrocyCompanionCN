@@ -38,6 +38,9 @@ fridge = 3
 living_room = 4
 bedroom = 5
 bathroom = 6
+# 注册RapidAPI账号，并在https://rapidapi.com/Glavier/api/barcodes1/的Pricing点击订阅（免费），复制Endpoints中的X_RapidAPI_Key于此处
+[RapidAPI]
+X_RapidAPI_Key = YOUR_RapidAPI_API_KEY
 ```
 其中，`GrocyLocation`id的获取方法:
 ```shell
@@ -59,17 +62,6 @@ services:
     volumes:
       - ./config.ini:/usr/src/app/config.ini
       # - ./u2net.onnx:/root/.u2net/u2net.onnx
-    depends_on:
-      - chrome
-    networks:
-      - grocy_cn_campanion
-
-  chrome:
-    image: selenium/standalone-chrome:latest
-    restart: always
-    ports:
-      - "4444:4444"
-    shm_size: 1g
     networks:
       - grocy_cn_campanion
 
