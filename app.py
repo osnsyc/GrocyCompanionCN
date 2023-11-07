@@ -20,6 +20,7 @@ GROCY_DEFAULT_BEST_BEFORE_DAYS = config.get('Grocy', 'GROCY_DEFAULT_BEST_BEFORE_
 GROCY_LOCATION = {}
 for key in config['GrocyLocation']:
     GROCY_LOCATION[key] = config.get('GrocyLocation', key)
+X_RapidAPI_Key = config.get('RapidAPI', 'X_RapidAPI_Key')
 
 app = Flask(__name__)
 grocy = Grocy(GROCY_URL, GROCY_API, GROCY_PORT, verify_ssl = True)
@@ -82,13 +83,16 @@ def add_product(dict_good, client):
         pic_url = dict_good["picture_filename"]
 
     if pic_url:
-        response_img = requests.get(pic_url)
-        if response_img.status_code == 200:
-            image_data = response_img.content
-            with open("img.png", 'wb') as o:
-                output_data = remove(image_data)
-                o.write(output_data)
-        grocy.add_product_pic(int(response_grocy["created_object_id"]),"img.png")
+        try:
+            response_img = requests.get(pic_url,{'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"})
+            if response_img.status_code == 200:
+                image_data = response_img.content
+                with open("img.png", 'wb') as o:
+                    output_data = remove(image_data)
+                    o.write(output_data)
+            grocy.add_product_pic(int(response_grocy["created_object_id"]),"img.png")
+        except requests.exceptions.RequestException as err:
+            print("Request error:", err)
 
     grocy.add_product_by_barcode(dict_good["gtin"],1.0,0.0)
     return True
@@ -136,7 +140,7 @@ def add():
         return jsonify(response_data), 200
     except:
         if aimid == "]E0":
-            spider = BarCodeSpider()
+            spider = BarCodeSpider(x_rapidapi_key=X_RapidAPI_Key)
             good = spider.get_good(barcode)
             if add_product(good, client):
                 response_data = {"message": "New item added successfully"}
