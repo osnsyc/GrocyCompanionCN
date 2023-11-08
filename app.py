@@ -140,7 +140,9 @@ def add():
         return jsonify(response_data), 200
     except:
         if aimid == "]E0":
-            spider = BarCodeSpider(x_rapidapi_key=X_RapidAPI_Key)
+            spider = BarCodeSpider(rapid_api_url="https://barcodes1.p.rapidapi.com/", 
+                                   x_rapidapi_key=X_RapidAPI_Key,
+                                   x_rapidapi_host="barcodes1.p.rapidapi.com")
             good = spider.get_good(barcode)
             if add_product(good, client):
                 response_data = {"message": "New item added successfully"}
