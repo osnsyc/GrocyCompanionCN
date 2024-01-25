@@ -10,6 +10,7 @@ Grocy配置,Web界面中:
 - `设置`-`管理API密钥`-`添加`
 - `管理主数据`-`位置`- 根据自身情况添加
 - `管理主数据`- `自定义字段`- `添加`- 表单信息:实体:products;名称GDSInfo;标题:GDSInfo;类型:单行文本,勾选"在表格中显示此列"
+- 配置`数量单位`：`数量单位`-`添加`
 
 ```shell
 docker pull osnsyc/grocycompanioncn:latest
@@ -23,6 +24,8 @@ docker pull osnsyc/grocycompanioncn:latest
 GROCY_URL = http://EXAMPLE.COM
 GROCY_PORT = 443
 GROCY_API = YOUR_GROCY_API_KEY
+# GROCY_DEFAULT_QUANTITY_UNIT_ID 在 shell内获取:
+; curl -X 'GET' 'https://EXAMPLE.COM:PORT/api/objects/quantity_units' \  -H 'accept: application/json' \  -H 'GROCY-API-KEY:YOUR_GROCY_API_KEY' \  | echo -e "$(cat)"
 GROCY_DEFAULT_QUANTITY_UNIT_ID = 1  # 默认的数量单位ID
 GROCY_DEFAULT_BEST_BEFORE_DAYS = 365  # 默认的保质期天数
 # 存储位置ID,与scanner.ino内的位置名称对应
@@ -30,7 +33,7 @@ GROCY_DEFAULT_BEST_BEFORE_DAYS = 365  # 默认的保质期天数
 ; curl -X 'GET' 'https://EXAMPLE.COM:PORT/api/objects/locations' \
 ; -H 'accept: application/json' \
 ; -H 'GROCY-API-KEY:YOUR_GROCY_API_KEY' \
-; | echo -e "$(cat)"" 
+; | echo -e "$(cat)"
 [GrocyLocation]
 pantry = 1
 temporary_storage = 2
@@ -42,12 +45,20 @@ bathroom = 6
 [RapidAPI]
 X_RapidAPI_Key = YOUR_RapidAPI_API_KEY
 ```
+其中，`GROCY_DEFAULT_QUANTITY_UNIT_ID`的获取方法:
+```shell
+curl -X 'GET' 'https://EXAMPLE.COM:PORT/api/objects/quantity_units' \
+  -H 'accept: application/json' \
+  -H 'GROCY-API-KEY:YOUR_GROCY_API_KEY' \
+  | echo -e "$(cat)"
+```
+
 其中，`GrocyLocation`id的获取方法:
 ```shell
 curl -X 'GET' 'https://EXAMPLE.COM:PORT/api/objects/locations' \
 -H 'accept: application/json' \
 -H 'GROCY-API-KEY:YOUR_GROCY_API_KEY' \
-| echo -e "$(cat)""
+| echo -e "$(cat)"
 ```
 
 ```yml
@@ -154,6 +165,21 @@ https://img.alicdn.com/imgextra/i3/343151/O1CN01QbKGVt1Z9CkLwAzKp_!!343151.jpg
 
 ![shell](./document/shell.png)
 
+## 物料清单与参考链接
+
+
+| 序号 | 名称         | 参考链接                                                                                                                                                        |
+| ---- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | GM805        | [颜色分类：默认](https://item.taobao.com/item.htm?_u=pnh8ujp653f&id=670772947536&spm=a1z09.2.0.0.63572e8d9a6VqT)                                                |
+| 2    | ESP01        | [颜色分类：ESP-01S](https://item.taobao.com/item.htm?_u=pnh8ujp6e5a&id=664680861283&spm=a1z09.8149145.0.0.3de7269aKjcPDW)                                       |
+| 3    | AMS1117      | [颜色分类：AMS1117-3.3模块 3脚](https://detail.tmall.com/item.htm?_u=pnh8ujp8a63&id=650922269502&spm=a1z09.2.0.0.63572e8dhXa8kZ)                                |
+| 4    | 拨动开关     | [颜色分类：柄高4mm](https://detail.tmall.com/item.htm?_u=pnh8ujpab3e&id=679299103183&spm=a1z09.2.0.0.63572e8dhXa8kZ)                                            |
+| 5    | 限位开关     | [颜色分类：KW12 3脚21mm圆弧柄](https://detail.tmall.com/item.htm?_u=pnh8ujp3181&id=706873714470&spm=a1z09.2.0.0.63572e8dhXa8kZ)                                           |
+| 6    | 3.7V锂电池   | [颜色分类：3.7V并联加厚600mAh/XH2.54反向插](https://item.taobao.com/item.htm?_u=pnh8ujp152e&id=643433296669&spm=a1z09.2.0.0.63572e8d9a6VqT&skuId=4799818249667) |
+| 7    | 锂电池充电器 | [颜色分类：500mA/XH2.54反向母插转换头](https://item.taobao.com/item.htm?_u=pnh8ujp28f4&id=16985757260&skuId=3484166170023&spm=a1z09.2.0.0.63572e8d9a6VqT)       |
+| 8    | PCB跳线      |                                                                                                                                                                 |
+| 9    | PCB洞洞板    | [颜色分类：双面喷锡 2x8cm](https://detail.tmall.com/item.htm?_u=pnh8ujp1c7f&id=667259213547&spm=a1z09.2.0.0.63572e8dhXa8kZ)                                     |
+| 10     |  ESP烧录器            |           [颜色分类：ESP-01/01S CH340芯片](https://item.taobao.com/item.htm?_u=pnh8ujp6e5a&id=664680861283&skuId=4961471522476&spm=a1z09.2.0.0.67002e8dPzgKnw)                                                                                                                                                      |
 
 # 鸣谢
 
