@@ -180,7 +180,8 @@ https://img.alicdn.com/imgextra/i3/343151/O1CN01QbKGVt1Z9CkLwAzKp_!!343151.jpg
 | 8    | PCB跳线      |                                                                                                                                                                 |
 | 9    | PCB洞洞板    | [颜色分类：双面喷锡 2x8cm](https://detail.tmall.com/item.htm?_u=pnh8ujp1c7f&id=667259213547&spm=a1z09.2.0.0.63572e8dhXa8kZ)                                     |
 | 10     |  ESP烧录器            |           [颜色分类：ESP-01/01S CH340芯片](https://item.taobao.com/item.htm?_u=pnh8ujp6e5a&id=664680861283&skuId=4961471522476&spm=a1z09.2.0.0.67002e8dPzgKnw)                                                                                                                                                      |
-
+| 11   | 注塑铜螺母   | [颜色分类：M2x4x3.5](https://detail.tmall.com/item.htm?_u=tnh8ujp4e44&id=673367228604&spm=a1z09.2.0.0.3ab22e8dJ2V8vu)                                           |
+| 12     |    螺丝          |     M2x6                                                                                                                                                            |
 # 鸣谢
 
 - https://github.com/tenlee2012/BarCodeQuery
